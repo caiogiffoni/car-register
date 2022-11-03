@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createCarService } from "../../services/car/createCar.service";
 import { deleteCarService } from "../../services/car/deleteCar.service";
 import { listCarService } from "../../services/car/listCar.service";
+import { updateCarService } from "../../services/car/updateCar.service";
 
 export default class CarController {
   async create(req: Request, res: Response) {
@@ -21,26 +22,21 @@ export default class CarController {
     return res.status(200).json(events);
   }
 
-  // async readOneEvent(req: Request, res: Response) {
-  //   const id = req.params.id;
-  //   const event = await listOneEventService(id);
-  //   return res.status(200).json(event);
-  // }
+  //Atualizar Car por id
+  async update(req: Request, res: Response) {
+    const { brand, model, year_fabrication, year_model, shift } = req.body;
+    const { id } = req.params;
+    const updatedCar = await updateCarService({
+      id,
+      brand,
+      model,
+      year_fabrication,
+      year_model,
+      shift,
+    });
 
-  // async update(req: Request, res: Response) {
-  //   const { name, description, date } = req.body;
-  //   const id = req.params.id;
-  //   const user = req.user.id;
-  //   await updateEventService({
-  //     name,
-  //     description,
-  //     date,
-  //     id,
-  //     user,
-  //   });
-
-  //   return res.status(200).json({ message: "Event updated!" });
-  // }
+    return res.status(200).json(updatedCar);
+  }
 
   async delete(req: Request, res: Response) {
     const { id } = req.params;

@@ -16,3 +16,7 @@ export interface ICarCreate {
   year_model: number;
   shift: string;
 }
+
+export interface ICarUpdate extends ICarCreate {
+  id: string;
+}
