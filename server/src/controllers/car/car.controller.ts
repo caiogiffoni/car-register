@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { createCarService } from "../../services/car/createCar.service";
+import { deleteCarService } from "../../services/car/deleteCar.service";
 import { listCarService } from "../../services/car/listCar.service";
 
 export default class CarController {
@@ -41,10 +42,9 @@ export default class CarController {
   //   return res.status(200).json({ message: "Event updated!" });
   // }
 
-  // async delete(req: Request, res: Response) {
-  //   const { id } = req.params;
-  //   const user = req.user.id;
-  //   await deleteEventService(id, user);
-  //   return res.status(200).json({ message: "Event deleted!" });
-  // }
+  async delete(req: Request, res: Response) {
+    const { id } = req.params;
+    await deleteCarService(id);
+    return res.status(200).json({ message: "Car deleted!" });
+  }
 }
