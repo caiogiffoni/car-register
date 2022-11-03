@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { createCarService } from "../../services/car/createCar.service";
 import { deleteCarService } from "../../services/car/deleteCar.service";
 import { listCarService } from "../../services/car/listCar.service";
+import { readFilteredCarService } from "../../services/car/listFilteredCar.service";
 import { updateCarService } from "../../services/car/updateCar.service";
 
 export default class CarController {
@@ -45,5 +46,12 @@ export default class CarController {
     const { id } = req.params;
     await deleteCarService(id);
     return res.status(200).json({ message: "Car deleted!" });
+  }
+
+  // Filtrar Carros por Shift
+  async filterPerShift(req: Request, res: Response) {
+    const { shiftFilter } = req.params;
+    const cars = await readFilteredCarService(shiftFilter);
+    return res.status(200).json(cars);
   }
 }
