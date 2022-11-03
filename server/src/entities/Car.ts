@@ -14,10 +14,10 @@ export class Car {
   readonly id: string;
 
   @Column()
-  marca: string;
+  brand: string;
 
   @Column()
-  modelo: string;
+  model: string;
 
   @Column()
   year_fabrication: number;

@@ -9,12 +9,6 @@ app.use(express.json());
 
 appRoutes(app);
 
-app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({
-    message: "Hello World",
-  });
-});
-
 app.use(errorMiddleware);
 
 export default app;

@@ -1,18 +1,19 @@
 import { Request, Response } from "express";
+import { createCarService } from "../../services/car/createCar.service";
 import { listCarService } from "../../services/car/listCar.service";
 
 export default class CarController {
-  // async create(req: Request, res: Response) {
-  //   const { name, description, date } = req.newEvent;
-  //   const user = req.user.id;
-  //   const newEvent = await createEventService({
-  //     name,
-  //     description,
-  //     date,
-  //     user,
-  //   });
-  //   return res.status(201).json(newEvent);
-  // }
+  async create(req: Request, res: Response) {
+    const { brand, model, year_fabrication, year_model, shift } = req.body;
+    const newCar = await createCarService({
+      brand,
+      model,
+      year_fabrication,
+      year_model,
+      shift,
+    });
+    return res.status(201).json(newCar);
+  }
 
   async read(req: Request, res: Response) {
     const events = await listCarService();
