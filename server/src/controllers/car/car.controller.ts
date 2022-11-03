@@ -5,6 +5,7 @@ import { listCarService } from "../../services/car/listCar.service";
 import { updateCarService } from "../../services/car/updateCar.service";
 
 export default class CarController {
+  // Criar Carros
   async create(req: Request, res: Response) {
     const { brand, model, year_fabrication, year_model, shift } = req.body;
     const newCar = await createCarService({
@@ -17,12 +18,13 @@ export default class CarController {
     return res.status(201).json(newCar);
   }
 
+  // Ler Carros
   async read(req: Request, res: Response) {
-    const events = await listCarService();
-    return res.status(200).json(events);
+    const cars = await listCarService();
+    return res.status(200).json(cars);
   }
 
-  //Atualizar Car por id
+  //Atualizar Carro por id
   async update(req: Request, res: Response) {
     const { brand, model, year_fabrication, year_model, shift } = req.body;
     const { id } = req.params;
@@ -38,6 +40,7 @@ export default class CarController {
     return res.status(200).json(updatedCar);
   }
 
+  // Deletar Carros
   async delete(req: Request, res: Response) {
     const { id } = req.params;
     await deleteCarService(id);

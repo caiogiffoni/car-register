@@ -6,7 +6,7 @@ export const deleteCarService = async (id: string): Promise<void> => {
   const carRepository = AppDataSource.getRepository(Car);
 
   if (id.length !== 36) {
-    throw new AppError(404, "Wrong event id");
+    throw new AppError(404, "Wrong car id");
   }
 
   const car = await carRepository.findOneBy({

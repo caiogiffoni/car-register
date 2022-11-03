@@ -13,6 +13,10 @@ export const updateCarService = async ({
 }: ICarUpdate): Promise<ICar> => {
   const carRepository = AppDataSource.getRepository(Car);
 
+  if (id.length !== 36) {
+    throw new AppError(404, "Wrong car id");
+  }
+
   const car = await carRepository.findOne({
     where: { id },
   });
