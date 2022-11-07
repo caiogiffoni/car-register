@@ -8,13 +8,15 @@ import { updateCarService } from "../../services/car/updateCar.service";
 export default class CarController {
   // Criar Carros
   async create(req: Request, res: Response) {
-    const { brand, model, year_fabrication, year_model, shift } = req.body;
+    const { brand, model, year_fabrication, year_model, shift, color } =
+      req.body;
     const newCar = await createCarService({
       brand,
       model,
       year_fabrication,
       year_model,
       shift,
+      color,
     });
     return res.status(201).json(newCar);
   }
@@ -27,7 +29,8 @@ export default class CarController {
 
   //Atualizar Carro por id
   async update(req: Request, res: Response) {
-    const { brand, model, year_fabrication, year_model, shift } = req.body;
+    const { brand, model, year_fabrication, year_model, shift, color } =
+      req.body;
     const { id } = req.params;
     const updatedCar = await updateCarService({
       id,
@@ -36,6 +39,7 @@ export default class CarController {
       year_fabrication,
       year_model,
       shift,
+      color,
     });
 
     return res.status(200).json(updatedCar);

@@ -2,6 +2,7 @@ export interface ICar {
   id: string;
   brand: string;
   model: string;
+  color: string;
   year_fabrication: number;
   year_model: number;
   shift: string;
@@ -12,6 +13,7 @@ export interface ICar {
 export interface ICarCreate {
   brand: string;
   model: string;
+  color: string;
   year_fabrication: number;
   year_model: number;
   shift: string;

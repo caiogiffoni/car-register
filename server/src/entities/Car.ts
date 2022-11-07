@@ -20,6 +20,9 @@ export class Car {
   model: string;
 
   @Column()
+  color: string;
+
+  @Column()
   year_fabrication: number;
 
   @Column()

@@ -10,6 +10,7 @@ export const updateCarService = async ({
   year_fabrication,
   year_model,
   shift,
+  color,
 }: ICarUpdate): Promise<ICar> => {
   const carRepository = AppDataSource.getRepository(Car);
 
@@ -27,6 +28,7 @@ export const updateCarService = async ({
 
   brand = brand ? brand : car.brand;
   model = model ? model : car.model;
+  color = color ? color : car.color;
   year_fabrication = year_fabrication ? year_fabrication : car.year_fabrication;
   year_model = year_model ? year_model : car.year_model;
   shift = shift ? shift : car.shift;

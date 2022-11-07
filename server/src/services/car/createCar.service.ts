@@ -9,6 +9,7 @@ export const createCarService = async ({
   year_fabrication,
   year_model,
   shift,
+  color,
 }: ICarCreate): Promise<ICar> => {
   const carRepository = AppDataSource.getRepository(Car);
 
@@ -20,6 +21,7 @@ export const createCarService = async ({
       year_fabrication,
       year_model,
       shift,
+      color,
     },
   });
 
@@ -34,6 +36,7 @@ export const createCarService = async ({
     year_fabrication,
     year_model,
     shift,
+    color,
   });
 
   await carRepository.save(car);
