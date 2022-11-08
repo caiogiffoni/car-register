@@ -9,6 +9,13 @@ import { InputForm } from "./components/InputForm/Input";
 import api from "./services";
 import { useEffect, useState } from "react";
 import { CarCard } from "./components/CarCard/CarCard";
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Select,
+  Tag,
+} from "@chakra-ui/react";
 
 function App() {
   const schema = yup.object().shape({
@@ -84,7 +91,7 @@ function App() {
         display="flex"
         flexDirection="column"
       >
-        <Heading>Cadastro de Carros</Heading>
+        <Heading textAlign="center">Cadastro de Carros</Heading>
         <Box
           w="100%"
           minH="320px"
@@ -124,12 +131,18 @@ function App() {
             colorWordsDesc="black"
             {...register("year_model")}
           />
-          <InputForm
-            placeholder="Insira o tipo de câmbio do carro"
-            error={errors.shift}
-            colorWordsDesc="black"
-            {...register("shift")}
-          />
+          <FormControl>
+            <Select
+              placeholder="Insira o tipo de câmbio do carro"
+              color="gray.500"
+              bgColor="gray.50"
+              {...register("shift")}
+            >
+              <option value="Manual">Manual</option>
+              <option value="Automático">Automático</option>
+            </Select>
+            <FormErrorMessage>{errors.shift?.message}</FormErrorMessage>
+          </FormControl>
         </Box>
         <Button
           bgColor="#365fe6"
@@ -140,8 +153,16 @@ function App() {
           Enviar
         </Button>
       </Box>
-      <Box mt="40px">
-        <Heading>Carros Cadastrados</Heading>
+      <Box m="40px 0px">
+        <Heading textAlign="center">Carros Cadastrados</Heading>
+        <Box display="flex" justifyContent="space-around" mt="15px">
+          <Tag size="lg" variant="solid" colorScheme="teal">
+            Manual
+          </Tag>
+          <Tag size="lg" variant="solid" colorScheme="teal">
+            Automático
+          </Tag>
+        </Box>
         {cars && cars.map((car) => <CarCard car={car} />)}
       </Box>
     </Box>
