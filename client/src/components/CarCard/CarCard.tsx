@@ -2,21 +2,9 @@ import { Box, Heading, Text } from "@chakra-ui/layout";
 import { Icon } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
+import { IProps } from "../../interfaces";
 
-interface ICar {
-  id: string;
-  brand: string;
-  model: string;
-  color: string;
-  year_fabrication: number;
-  year_model: number;
-  shift: string;
-  created_at: string;
-  updated_at: string;
-}
-interface IProps {
-  car: ICar;
-}
+
 
 export const CarCard = ({ car }: IProps) => {
   return (

@@ -16,6 +16,7 @@ import {
   Select,
   Tag,
 } from "@chakra-ui/react";
+import { ICar, IPost } from "./interfaces";
 
 function App() {
   const schema = yup.object().shape({
@@ -33,16 +34,8 @@ function App() {
     shift: yup.string().required("Campo obrigatório!"),
   });
 
-  interface IPost {
-    brand: string;
-    model: string;
-    color: string;
-    year_fabrication: number;
-    year_model: number;
-    shift: string;
-  }
-
-  const [cars, setCars] = useState([]);
+  const [cars, setCars] = useState<ICar[]>([]);
+  const [filteredCars, setfilteredCars] = useState<ICar[]>([]);
 
   const onSubmitFunction = async (data: IPost) => {
     api
@@ -69,8 +62,16 @@ function App() {
   const getCars = () => {
     api
       .get(`/car`)
-      .then((res) => setCars(res.data))
+      .then((res) => {
+        setCars(res.data);
+        setfilteredCars(res.data);
+      })
       .catch((e) => console.log(e));
+  };
+
+  const changeFilter = async (filter: string) => {
+    const filterCars = cars.filter((car) => car.shift === filter);
+    setfilteredCars(filterCars);
   };
 
   return (
@@ -156,14 +157,25 @@ function App() {
       <Box m="40px 0px">
         <Heading textAlign="center">Carros Cadastrados</Heading>
         <Box display="flex" justifyContent="space-around" mt="15px">
-          <Tag size="lg" variant="solid" colorScheme="teal">
+          <Button colorScheme="teal" size="md" onClick={() => getCars()}>
+            Todos
+          </Button>
+          <Button
+            colorScheme="teal"
+            size="md"
+            onClick={() => changeFilter("Manual")}
+          >
             Manual
-          </Tag>
-          <Tag size="lg" variant="solid" colorScheme="teal">
+          </Button>
+          <Button
+            colorScheme="teal"
+            size="md"
+            onClick={() => changeFilter("Automático")}
+          >
             Automático
-          </Tag>
+          </Button>
         </Box>
-        {cars && cars.map((car) => <CarCard car={car} />)}
+        {filteredCars && filteredCars.map((car) => <CarCard car={car} />)}
       </Box>
     </Box>
   );
