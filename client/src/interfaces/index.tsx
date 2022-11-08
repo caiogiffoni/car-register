@@ -11,6 +11,7 @@ export interface ICar {
 }
 export interface IProps {
   car: ICar;
+  getCars: () => void;
 }
 
 export interface IPost {

@@ -3,8 +3,9 @@ import { Icon } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { IProps } from "../../interfaces";
+import { ModalDelete } from "../ModalDelete";
 
-export const CarCard = ({ car }: IProps) => {
+export const CarCard = ({ car, getCars }: IProps) => {
   return (
     <Box
       w={["100%", "400px", "500px"]}
@@ -19,9 +20,7 @@ export const CarCard = ({ car }: IProps) => {
           <Box p="4px" bgColor="#6083f7" borderRadius="3px" display="flex">
             <Icon as={AiOutlineEdit} />
           </Box>
-          <Box p="4px" bgColor="#ee3232" borderRadius="3px" display="flex">
-            <Icon as={AiOutlineDelete} />
-          </Box>
+          <ModalDelete id={car.id} getCars={getCars} />
         </Box>
       </Box>
       <Box display="flex" justifyContent="space-between">

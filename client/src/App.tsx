@@ -205,7 +205,10 @@ function App() {
           flexDirection="column"
           alignItems="center"
         >
-          {filteredCars && filteredCars.map((car) => <CarCard car={car} />)}
+          {filteredCars &&
+            filteredCars.map((car, index) => (
+              <CarCard car={car} key={index} getCars={getCars} />
+            ))}
         </Box>
       </Box>
     </Box>
