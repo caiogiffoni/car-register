@@ -9,14 +9,7 @@ import { InputForm } from "./components/InputForm/Input";
 import api from "./services";
 import { useEffect, useState } from "react";
 import { CarCard } from "./components/CarCard/CarCard";
-import {
-  background,
-  FormControl,
-  FormErrorMessage,
-  FormLabel,
-  Select,
-  Tag,
-} from "@chakra-ui/react";
+import { FormControl, FormErrorMessage, Select } from "@chakra-ui/react";
 import { ICar, IPost } from "./interfaces";
 
 function App() {
@@ -37,7 +30,6 @@ function App() {
 
   const [cars, setCars] = useState<ICar[]>([]);
   const [filteredCars, setfilteredCars] = useState<ICar[]>([]);
-  const [btnAll, BtnAll] = useState<Boolean>(true);
 
   const onSubmitFunction = async (data: IPost) => {
     api
@@ -90,11 +82,13 @@ function App() {
         p="40px"
         mt="40px"
         borderRadius="15px"
-        w="600px"
+        w={["80%", "60%", "600px"]}
         display="flex"
         flexDirection="column"
       >
-        <Heading textAlign="center">Cadastro de Carros</Heading>
+        <Heading textAlign="center" fontSize={["lg", "xl", "2xl"]}>
+          Cadastro de Carros
+        </Heading>
         <Box
           w="100%"
           minH="320px"
@@ -105,7 +99,7 @@ function App() {
           mt="15px"
         >
           <InputForm
-            placeholder="Insira a marca do carro"
+            placeholder={"Insira a marca do carro"}
             error={errors.brand}
             colorWordsDesc="black"
             {...register("brand")}
@@ -156,13 +150,27 @@ function App() {
           Enviar
         </Button>
       </Box>
-      <Box m="40px 0px">
-        <Heading textAlign="center">Carros Cadastrados</Heading>
-        <Box display="flex" justifyContent="space-around" mt="15px">
+      <Box
+        m="40px 0px"
+        w="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Heading textAlign="center" fontSize={["lg", "xl", "2xl"]}>
+          Carros Cadastrados
+        </Heading>
+        <Box
+          display="flex"
+          justifyContent="space-around"
+          mt="15px"
+          w={["80%", "70%", "600px"]}
+        >
           <Button
             autoFocus
             colorScheme="blue"
-            size="md"
+            size={["sm", "md"]}
             onClick={() => getCars()}
             _focus={{
               bgColor: "green",
@@ -172,7 +180,7 @@ function App() {
           </Button>
           <Button
             colorScheme="blue"
-            size="md"
+            size={["sm", "md"]}
             onClick={() => changeFilter("Manual")}
             _focus={{
               bgColor: "green",
@@ -182,7 +190,7 @@ function App() {
           </Button>
           <Button
             colorScheme="blue"
-            size="md"
+            size={["sm", "md"]}
             onClick={() => changeFilter("Automático")}
             _focus={{
               bgColor: "green",
@@ -191,7 +199,14 @@ function App() {
             Automático
           </Button>
         </Box>
-        {filteredCars && filteredCars.map((car) => <CarCard car={car} />)}
+        <Box
+          w={["80%", "70%", "100%"]}
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+        >
+          {filteredCars && filteredCars.map((car) => <CarCard car={car} />)}
+        </Box>
       </Box>
     </Box>
   );
