@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 import { Box, Heading, Text } from "@chakra-ui/layout";
-import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -149,67 +148,90 @@ function App() {
           Enviar
         </Button>
       </Box>
-      <Box
-        m="40px 0px"
-        w="100%"
-        display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Heading textAlign="center" fontSize={["lg", "xl", "2xl"]}>
-          Carros Cadastrados
-        </Heading>
+      {cars.length > 0 ? (
         <Box
-          display="flex"
-          justifyContent="space-around"
-          mt="15px"
-          w={["80%", "70%", "600px"]}
-        >
-          <Button
-            autoFocus
-            colorScheme="blue"
-            size={["sm", "md"]}
-            onClick={() => getCars()}
-            _focus={{
-              bgColor: "green",
-            }}
-          >
-            Todos
-          </Button>
-          <Button
-            colorScheme="blue"
-            size={["sm", "md"]}
-            onClick={() => changeFilter("Manual")}
-            _focus={{
-              bgColor: "green",
-            }}
-          >
-            Manual
-          </Button>
-          <Button
-            colorScheme="blue"
-            size={["sm", "md"]}
-            onClick={() => changeFilter("Automático")}
-            _focus={{
-              bgColor: "green",
-            }}
-          >
-            Automático
-          </Button>
-        </Box>
-        <Box
-          w={["80%", "70%", "100%"]}
+          m="40px 0px"
+          w="100%"
           display="flex"
           flexDirection="column"
+          justifyContent="center"
           alignItems="center"
         >
-          {filteredCars &&
-            filteredCars.map((car, index) => (
-              <CarCard car={car} key={index} getCars={getCars} />
-            ))}
+          <Heading textAlign="center" fontSize={["lg", "xl", "2xl"]}>
+            Carros Cadastrados
+          </Heading>
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            mt="15px"
+            w={["80%", "70%", "600px"]}
+          >
+            <Button
+              autoFocus
+              colorScheme="blue"
+              size={["sm", "md"]}
+              onClick={() => getCars()}
+              _focus={{
+                bgColor: "green",
+              }}
+            >
+              Todos
+            </Button>
+            <Button
+              colorScheme="blue"
+              size={["sm", "md"]}
+              onClick={() => changeFilter("Manual")}
+              _focus={{
+                bgColor: "green",
+              }}
+            >
+              Manual
+            </Button>
+            <Button
+              colorScheme="blue"
+              size={["sm", "md"]}
+              onClick={() => changeFilter("Automático")}
+              _focus={{
+                bgColor: "green",
+              }}
+            >
+              Automático
+            </Button>
+          </Box>
+          <Box
+            w={["80%", "70%", "100%"]}
+            display="flex"
+            flexDirection="column"
+            alignItems="center"
+          >
+            {filteredCars &&
+              filteredCars.map((car, index) => (
+                <CarCard car={car} key={index} getCars={getCars} />
+              ))}
+          </Box>
         </Box>
-      </Box>
+      ) : (
+        <Box
+          m="40px 0px"
+          w="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Box
+            display="flex"
+            justifyContent="space-around"
+            mt="15px"
+            w={["80%", "70%", "600px"]}
+          >
+            <Heading textAlign="center" fontSize={["lg", "xl", "2xl"]}>
+              Você ainda não tem nenhum carro cadastrado! Cadastre um carro
+              acima
+            </Heading>
+          </Box>
+        </Box>
+      )}
     </Box>
   );
 }
