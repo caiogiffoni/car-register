@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
 
-import "./App.css";
 import { Box, Heading, Text } from "@chakra-ui/layout";
 import { Input } from "@chakra-ui/input";
 import { Button } from "@chakra-ui/button";
@@ -8,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { InputForm } from "./components/InputForm/Input";
 import api from "./services";
+import { useEffect, useState } from "react";
+import { CarCard } from "./components/CarCard/CarCard";
 
 function App() {
   const schema = yup.object().shape({
@@ -34,12 +35,13 @@ function App() {
     shift: string;
   }
 
+  const [cars, setCars] = useState([]);
+
   const onSubmitFunction = async (data: IPost) => {
-    console.log("envieou");
     api
       .post("/car", data)
-      .then((res) => {
-        console.log("ok");
+      .then((_) => {
+        getCars();
       })
       .catch((err) => {
         console.log(err);
@@ -53,63 +55,95 @@ function App() {
     resolver: yupResolver(schema),
   });
 
+  useEffect(() => {
+    getCars();
+  }, []);
+
+  const getCars = () => {
+    api
+      .get(`/car`)
+      .then((res) => setCars(res.data))
+      .catch((e) => console.log(e));
+  };
+
   return (
-    <Box bgColor="#c9c4c4" p="15px" borderRadius="15px">
-      <Heading>Cadastro de Carros</Heading>
+    <Box
+      w="100%"
+      h="100%"
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      alignItems="center"
+    >
       <Box
+        bgColor="#c9c4c4"
+        p="40px"
+        mt="40px"
+        borderRadius="15px"
         w="600px"
-        minH="320px"
         display="flex"
         flexDirection="column"
-        justifyContent="space-between"
-        gap="8px"
-        mt="15px"
       >
-        <InputForm
-          placeholder="Insira a marca do carro"
-          error={errors.brand}
-          colorWordsDesc="black"
-          {...register("brand")}
-        />
-        <InputForm
-          placeholder="Insira a modelo do carro"
-          error={errors.model}
-          colorWordsDesc="black"
-          {...register("model")}
-        />
-        <InputForm
-          placeholder="Insira a cor do carro"
-          error={errors.color}
-          colorWordsDesc="black"
-          {...register("color")}
-        />
-        <InputForm
-          placeholder="Insira o ano de fabricação do carro"
-          error={errors.year_fabrication}
-          colorWordsDesc="black"
-          {...register("year_fabrication")}
-        />
-        <InputForm
-          placeholder="Insira o ano do modelo carro"
-          error={errors.year_model}
-          colorWordsDesc="black"
-          {...register("year_model")}
-        />
-        <InputForm
-          placeholder="Insira o tipo de câmbio do carro"
-          error={errors.shift}
-          colorWordsDesc="black"
-          {...register("shift")}
-        />
+        <Heading>Cadastro de Carros</Heading>
+        <Box
+          w="100%"
+          minH="320px"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+          gap="8px"
+          mt="15px"
+        >
+          <InputForm
+            placeholder="Insira a marca do carro"
+            error={errors.brand}
+            colorWordsDesc="black"
+            {...register("brand")}
+          />
+          <InputForm
+            placeholder="Insira a modelo do carro"
+            error={errors.model}
+            colorWordsDesc="black"
+            {...register("model")}
+          />
+          <InputForm
+            placeholder="Insira a cor do carro"
+            error={errors.color}
+            colorWordsDesc="black"
+            {...register("color")}
+          />
+          <InputForm
+            placeholder="Insira o ano de fabricação do carro"
+            error={errors.year_fabrication}
+            colorWordsDesc="black"
+            {...register("year_fabrication")}
+          />
+          <InputForm
+            placeholder="Insira o ano do modelo carro"
+            error={errors.year_model}
+            colorWordsDesc="black"
+            {...register("year_model")}
+          />
+          <InputForm
+            placeholder="Insira o tipo de câmbio do carro"
+            error={errors.shift}
+            colorWordsDesc="black"
+            {...register("shift")}
+          />
+        </Box>
+        <Button
+          bgColor="#365fe6"
+          mt="15px"
+          color="white"
+          onClick={handleSubmit(onSubmitFunction)}
+        >
+          Enviar
+        </Button>
       </Box>
-      <Button
-        bgColor="#365fe6"
-        mt="15px"
-        color="white"
-        onClick={handleSubmit(onSubmitFunction)}
-      >
-        Enviar
-      </Button>
+      <Box mt="40px">
+        <Heading>Carros Cadastrados</Heading>
+        {cars && cars.map((car) => <CarCard car={car} />)}
+      </Box>
     </Box>
   );
 }
