@@ -40,6 +40,7 @@ export const updateCarService = async ({
     year_fabrication,
     year_model,
     shift,
+    color,
   };
 
   await carRepository.save(updatedCar);
