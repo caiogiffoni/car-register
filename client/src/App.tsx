@@ -10,6 +10,7 @@ import api from "./services";
 import { useEffect, useState } from "react";
 import { CarCard } from "./components/CarCard/CarCard";
 import {
+  background,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -36,6 +37,7 @@ function App() {
 
   const [cars, setCars] = useState<ICar[]>([]);
   const [filteredCars, setfilteredCars] = useState<ICar[]>([]);
+  const [btnAll, BtnAll] = useState<Boolean>(true);
 
   const onSubmitFunction = async (data: IPost) => {
     api
@@ -157,20 +159,34 @@ function App() {
       <Box m="40px 0px">
         <Heading textAlign="center">Carros Cadastrados</Heading>
         <Box display="flex" justifyContent="space-around" mt="15px">
-          <Button colorScheme="teal" size="md" onClick={() => getCars()}>
+          <Button
+            autoFocus
+            colorScheme="blue"
+            size="md"
+            onClick={() => getCars()}
+            _focus={{
+              bgColor: "green",
+            }}
+          >
             Todos
           </Button>
           <Button
-            colorScheme="teal"
+            colorScheme="blue"
             size="md"
             onClick={() => changeFilter("Manual")}
+            _focus={{
+              bgColor: "green",
+            }}
           >
             Manual
           </Button>
           <Button
-            colorScheme="teal"
+            colorScheme="blue"
             size="md"
             onClick={() => changeFilter("Automático")}
+            _focus={{
+              bgColor: "green",
+            }}
           >
             Automático
           </Button>
