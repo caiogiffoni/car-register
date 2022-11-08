@@ -51,6 +51,11 @@ function App() {
             status: "error",
           });
         }
+        toast({
+          title: err.response.data.message,
+          description: err.response.data.message,
+          status: "error",
+        });
       });
   };
   const {
