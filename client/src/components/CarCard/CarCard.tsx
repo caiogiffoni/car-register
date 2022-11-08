@@ -1,9 +1,9 @@
 import { Box, Heading, Text } from "@chakra-ui/layout";
 import { Icon } from "@chakra-ui/react";
-import { AiOutlineDelete } from "react-icons/ai";
 import { AiOutlineEdit } from "react-icons/ai";
 import { IProps } from "../../interfaces";
 import { ModalDelete } from "../ModalDelete";
+import { ModalEdit } from "../ModalEdit";
 
 export const CarCard = ({ car, getCars }: IProps) => {
   return (
@@ -17,9 +17,7 @@ export const CarCard = ({ car, getCars }: IProps) => {
       <Box display="flex" justifyContent="space-between">
         <Heading fontSize="md">{`${car.brand} - ${car.model}`}</Heading>
         <Box display="flex" gap="12px">
-          <Box p="4px" bgColor="#6083f7" borderRadius="3px" display="flex">
-            <Icon as={AiOutlineEdit} />
-          </Box>
+          <ModalEdit car={car} getCars={getCars} />
           <ModalDelete id={car.id} getCars={getCars} />
         </Box>
       </Box>

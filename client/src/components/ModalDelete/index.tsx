@@ -39,8 +39,9 @@ export const ModalDelete = ({ id, getCars }: IDelete) => {
         borderRadius="3px"
         display="flex"
         _hover={{ cursor: "pointer" }}
+        onClick={onOpen}
       >
-        <Icon onClick={onOpen} as={AiOutlineDelete} />
+        <Icon as={AiOutlineDelete} />
       </Box>
 
       <Modal isOpen={isOpen} onClose={onClose}>
