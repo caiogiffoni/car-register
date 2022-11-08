@@ -46,8 +46,8 @@ export const ModalDelete = ({ id, getCars }: IDelete) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Deletar Registro de carro</ModalHeader>
+        <ModalContent w='90%'>
+          <ModalHeader>Deletar carro</ModalHeader>
           <ModalCloseButton />
           <ModalBody>Tem certeza que deseja deletar esse registro?</ModalBody>
 

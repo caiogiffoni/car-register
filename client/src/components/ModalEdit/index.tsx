@@ -77,8 +77,8 @@ export const ModalEdit = ({ car, getCars }: IEdit) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
-          <ModalHeader>Editar Registro de carro</ModalHeader>
+        <ModalContent w="90%">
+          <ModalHeader>Editar carro</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Box
