@@ -13,6 +13,7 @@ import {
 import { Icon } from "@chakra-ui/react";
 import { AiOutlineDelete } from "react-icons/ai";
 import api from "../../services";
+import { useToast } from "@chakra-ui/react";
 
 interface IDelete {
   id: string;
@@ -21,12 +22,18 @@ interface IDelete {
 
 export const ModalDelete = ({ id, getCars }: IDelete) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const toast = useToast();
 
   const deleteCar = (id: string) => {
     api
       .delete(`/car/${id}`)
       .then((res) => {
         getCars();
+        toast({
+          title: "Registro deletado.",
+          description: "Seu registro de carro foi deletado.",
+          status: "success",
+        });
       })
       .catch((e) => console.log(e));
     onClose();
@@ -46,7 +53,7 @@ export const ModalDelete = ({ id, getCars }: IDelete) => {
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent w='90%'>
+        <ModalContent w="90%">
           <ModalHeader>Deletar carro</ModalHeader>
           <ModalCloseButton />
           <ModalBody>Tem certeza que deseja deletar esse registro?</ModalBody>

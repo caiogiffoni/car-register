@@ -9,6 +9,7 @@ import { useEffect, useState } from "react";
 import { CarCard } from "./components/CarCard/CarCard";
 import { FormControl, FormErrorMessage, Select } from "@chakra-ui/react";
 import { ICar, IPost } from "./interfaces";
+import { useToast } from "@chakra-ui/react";
 
 function App() {
   const schema = yup.object().shape({
@@ -28,15 +29,28 @@ function App() {
 
   const [cars, setCars] = useState<ICar[]>([]);
   const [filteredCars, setfilteredCars] = useState<ICar[]>([]);
+  const toast = useToast();
 
   const onSubmitFunction = async (data: IPost) => {
     api
       .post("/car", data)
       .then((_) => {
         getCars();
+        toast({
+          title: "Registro criado.",
+          description: "Seu registro de carro foi criado.",
+          status: "success",
+        });
       })
       .catch((err) => {
         console.log(err);
+        if (err.response.data.message === "This car already exists") {
+          toast({
+            title: "Esse carro já existe.",
+            description: "Esse carro já foi cadastrado.",
+            status: "error",
+          });
+        }
       });
   };
   const {

@@ -21,6 +21,8 @@ import { InputForm } from "../InputForm/Input";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
+import { useToast } from "@chakra-ui/react";
+
 
 interface IEdit {
   car: ICar;
@@ -53,11 +55,18 @@ export const ModalEdit = ({ car, getCars }: IEdit) => {
     resolver: yupResolver(schema),
   });
 
+  const toast = useToast();
+
   const onSubmitFunction = (data: IPost) => {
     api
       .patch(`/car/${car.id}`, data)
       .then((res) => {
         getCars();
+        toast({
+          title: "Registro editado.",
+          description: "Seu registro de carro foi editado.",
+          status: "success",
+        });
       })
       .catch((e) => console.log(e));
     onClose();
