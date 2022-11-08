@@ -12,7 +12,9 @@
   },
   "scripts": {
     "dev": "ts-node-dev src/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs"
+    "typeorm": "typeorm-ts-node-commonjs",
+    "build": "tsc",
+    "start": "node dist/src/app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
